@@ -49,7 +49,6 @@ rm -rf $RPM_BUILD_ROOT
 
 cp -f ./makes/linux/%{name}-%{version}/share/doc/setedit/faq.txt .
 
-gzip -9nf README TODO faq.txt
 
 %find_lang %{name}
 
@@ -64,7 +63,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc *.gz
+%doc README TODO faq.txt
 %attr(755,root,root) %{_bindir}/*
 %{_infodir}/*
 %{_mandir}/man1/*
