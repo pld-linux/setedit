@@ -62,9 +62,9 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
-%files -f %{name}.lang 
+%files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc *.gz 
+%doc *.gz
 %attr(755,root,root) %{_bindir}/*
 %{_infodir}/*
 %{_mandir}/man1/*
