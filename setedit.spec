@@ -5,17 +5,17 @@ Version:	0.4.54
 Release:	1
 License:	GPL
 Group:		Applications/Editors
-Source0:	http://prdownloads.sourceforge.net/setedit/%{name}-%{version}.tar.gz
-BuildRequires:	gcc-c++
-BuildRequires:	gpm-devel
-BuildRequires:	ncurses-devel
-BuildRequires:	perl
-BuildRequires:	gettext-devel
+Source0:	http://dl.sourceforge.net/setedit/%{name}-%{version}.tar.gz
 BuildRequires:	bzip2-devel
+BuildRequires:	gettext-devel
+BuildRequires:	gpm-devel
+BuildRequires:	librhtv-devel
+BuildRequires:	libstdc++-devel
+BuildRequires:	ncurses-devel
 BuildRequires:	pcre-devel
+BuildRequires:	perl
 BuildRequires:	recode
 BuildRequires:	zlib-devel
-BuildRequires:	librhtv-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -48,7 +48,6 @@ rm -rf $RPM_BUILD_ROOT
 	prefix=$RPM_BUILD_ROOT%{_prefix}
 
 cp -f ./makes/linux/%{name}-%{version}/share/doc/setedit/faq.txt .
-
 
 %find_lang %{name}
 
