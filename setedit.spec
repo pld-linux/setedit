@@ -6,7 +6,7 @@ Release:	1
 License:	GPL
 Group:		Applications/Editors
 Source0:	http://dl.sourceforge.net/setedit/%{name}-%{version}.tar.gz
-# Source0-md5:	86e4d5f345f9667c1d77a805d6a29173
+# Source0-md5:	3295a24e416d8dc8e50ab73faa99693e
 Patch0:		%{name}-gettext.patch
 BuildRequires:	aalib-devel
 BuildRequires:	bzip2-devel >= 0.9.5d
