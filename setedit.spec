@@ -1,22 +1,24 @@
 Summary:	User friendly text editor
 Summary(pl):	Przyjazny edytor tekstu
 Name:		setedit
-Version:	0.4.54
+Version:	0.5.2
 Release:	1
 License:	GPL
 Group:		Applications/Editors
 Source0:	http://dl.sourceforge.net/setedit/%{name}-%{version}.tar.gz
 # Source0-md5:	86e4d5f345f9667c1d77a805d6a29173
-BuildRequires:	bzip2-devel
+Patch0:		%{name}-gettext.patch
+BuildRequires:	aalib-devel
+BuildRequires:	bzip2-devel >= 0.9.5d
 BuildRequires:	gettext-devel
-BuildRequires:	gpm-devel
-BuildRequires:	librhtv-devel
+BuildRequires:	gpm-devel >= 1.10
+BuildRequires:	librhtv-devel >= 2.0.2
 BuildRequires:	libstdc++-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	pcre-devel
-BuildRequires:	perl
+BuildRequires:	perl-base
 BuildRequires:	recode
-BuildRequires:	zlib-devel
+BuildRequires:	zlib-devel >= 1.1.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -30,15 +32,19 @@ Ma on kilka "wodotrysków" np. odtwarzacz plików MP3. W zestawie jest
 tak¿e program infview do wy¶wietlania plików .info.
 
 %prep
-%setup -q -n setedit
+%setup -q -n %{name}
+%patch -p1
 
 %build
 rm -f Makefile
-perl ./config.pl --prefix=%{_prefix} \
-	--cflags="-pipe" --cxxflags="-pipe" \
+%{__perl} ./config.pl \
+	--prefix=%{_prefix} \
+	--cflags="-pipe" \
+	--cxxflags="-pipe" \
 	--Xcflags="%{rpmcflags}" \
 	--Xcppflags="%{rpmcflags} -fno-exceptions" \
-	--no-comp-exe
+	--no-comp-exe \
+	--fhs
 
 %{__make}
 
@@ -47,8 +53,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix}
-
-cp -f ./makes/linux/%{name}-%{version}/share/doc/setedit/faq.txt .
 
 %find_lang %{name}
 
@@ -63,9 +67,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc README TODO faq.txt
+%doc README TODO distrib/linux.faq
 %attr(755,root,root) %{_bindir}/*
-%{_infodir}/*
-%{_mandir}/man1/*
+%dir %{_libdir}/setedit
+%attr(755,root,root) %{_libdir}/setedit/*.so
+%{_libdir}/setedit/holidays.conf
 %{_datadir}/infview
 %{_datadir}/setedit
+%{_infodir}/*.info*
+%{_mandir}/man1/*
