@@ -1,13 +1,17 @@
+# TODO: 
+# - infview to separate package
+# - libraries and devel files (needed by rhide) to separate packages.
+%define	snap	20040910
 Summary:	User friendly text editor
 Summary(pl):	Przyjazny edytor tekstu
 Name:		setedit
-Version:	0.5.2
-Release:	1
+Version:	0.5.4
+Release:	0.%{snap}.0.1
 License:	GPL
 Group:		Applications/Editors
-Source0:	http://dl.sourceforge.net/setedit/%{name}-%{version}.tar.gz
-# Source0-md5:	3295a24e416d8dc8e50ab73faa99693e
-Patch0:		%{name}-gettext.patch
+# note - it's really snap version, waiting for final release
+Source0:	http://setedit.sourceforge.net/%{name}-%{version}.tar.gz
+# Source0-md5:	aa6a0533a4e1ebf7fb07a5398ce0d465
 BuildRequires:	aalib-devel
 BuildRequires:	bzip2-devel >= 0.9.5d
 BuildRequires:	gettext-devel
@@ -33,7 +37,6 @@ tak¿e program infview do wy¶wietlania plików .info.
 
 %prep
 %setup -q -n %{name}
-%patch -p1
 
 %build
 rm -f Makefile
@@ -54,6 +57,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix}
 
+mv $RPM_BUILD_ROOT%{_docdir}/setedit doc-setedit
+mv $RPM_BUILD_ROOT%{_docdir}/infview doc-infview
+
 %find_lang %{name}
 
 %clean
@@ -67,12 +73,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc README TODO distrib/linux.faq
-%attr(755,root,root) %{_bindir}/*
+%doc README TODO distrib/linux.faq doc-setedit/*
+%attr(755,root,root) %{_bindir}/%{name}
 %dir %{_libdir}/setedit
 %attr(755,root,root) %{_libdir}/setedit/*.so
 %{_libdir}/setedit/holidays.conf
-%{_datadir}/infview
 %{_datadir}/setedit
-%{_infodir}/*.info*
-%{_mandir}/man1/*
+%{_infodir}/s*.info*
+%{_mandir}/man1/setedit*
