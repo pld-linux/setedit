@@ -5,8 +5,13 @@ Version:	0.4.54
 Release:	1
 License:	GPL
 Group:		Applications/Editors
+Group(de):	Applikationen/Editors
+Group(es):	Aplicaciones/Editores
+Group(fr):	Applications/Editeurs
 Group(pl):	Aplikacje/Edytory
-Source0:	http://prdownloads.sourceforge.net/setedit/setedit-%{version}.tar.gz
+Group(pt):	AplicaÁıes/Editores
+Group(ru):	“…Ãœ÷≈Œ…—/Ú≈ƒ¡À‘œ“Ÿ
+Source0:	http://prdownloads.sourceforge.net/setedit/%{name}-%{version}.tar.gz
 BuildRequires:	gcc-c++
 BuildRequires:	gpm-devel
 BuildRequires:	ncurses-devel
@@ -20,31 +25,36 @@ BuildRequires:	librhtv-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Setedit is text editor, which uses Turbo Vision (menus, windows like in many
-DOS applications). It has some interesting features (MP3 player, etc).
-There is infview (viewer of info pages) in package also.
+Setedit is text editor, which uses Turbo Vision (menus, windows like
+in many DOS applications). It has some interesting features (MP3
+player, etc). There is infview (viewer of info pages) in package also.
 
 %description -l pl
 Setedit to bardzo przyjazny edytor tekstu (z okienkami, menu, itd.).
-Ma on kilka "wodotryskÛw" np. odtwarzacz plikÛw MP3.
-W zestawie jest takøe program infview do wy∂wietlania plikÛw .info.
+Ma on kilka "wodotryskÛw" np. odtwarzacz plikÛw MP3. W zestawie jest
+takøe program infview do wy∂wietlania plikÛw .info.
 
 %prep
 %setup -q -n setedit
 
 %build
-export CFLAGS="%{rpmcflags}" CXXFLAGS="%{rpmcflags} -fno-exceptions"
-./configure --prefix=$RPM_BUILD_ROOT%{_prefix}
+rm -f Makefile
+perl ./config.pl --prefix=%{_prefix} \
+	--cflags="-pipe" --cxxflags="-pipe" \
+	--Xcflags="%{rpmcflags}" \
+	--Xcppflags="%{rpmcflags} -fno-exceptions" \
+	--no-comp-exe
 
 %{__make}
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install
+%{__make} install \
+	prefix=$RPM_BUILD_ROOT%{_prefix}
 
-cp ./makes/linux/%{name}-%{version}/share/doc/setedit/faq.txt .
+cp -f ./makes/linux/%{name}-%{version}/share/doc/setedit/faq.txt .
+
 gzip -9nf README TODO faq.txt
 
 %find_lang %{name}
@@ -64,7 +74,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %{_infodir}/*
 %{_mandir}/man1/*
-%dir %{_datadir}/infview
-%dir %{_datadir}/setedit
-%{_datadir}/infview/*
-%{_datadir}/setedit/*
+%{_datadir}/infview
+%{_datadir}/setedit
