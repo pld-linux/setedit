@@ -1,6 +1,5 @@
-# TODO: 
-# - infview to separate package
-# - libraries and devel files (needed by rhide) to separate packages.
+# TODO:
+# - build and use shared library libset
 %define	snap	20040910
 Summary:	User friendly text editor
 Summary(pl):	Przyjazny edytor tekstu
@@ -12,6 +11,7 @@ Group:		Applications/Editors
 # note - it's really snap version, waiting for final release
 Source0:	http://setedit.sourceforge.net/%{name}-%{version}.tar.gz
 # Source0-md5:	aa6a0533a4e1ebf7fb07a5398ce0d465
+Patch0:		%{name}-fixlib.patch
 BuildRequires:	aalib-devel
 BuildRequires:	bzip2-devel >= 0.9.5d
 BuildRequires:	gettext-devel
@@ -28,15 +28,38 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Setedit is text editor, which uses Turbo Vision (menus, windows like
 in many DOS applications). It has some interesting features (MP3
-player, etc). There is infview (viewer of info pages) in package also.
+player, etc).
 
 %description -l pl
 Setedit to bardzo przyjazny edytor tekstu (z okienkami, menu, itd.).
 Ma on kilka "wodotrysków" np. odtwarzacz plików MP3. W zestawie jest
 tak¿e program infview do wy¶wietlania plików .info.
 
+%package -n infview
+Summary:	Viewer of info pages
+Summary(pl):	Przegl±darka plików .info
+Group:		Applications/Text
+
+%description -n infview
+Viewer of .info pages.
+
+%description -n infview -l pl
+Przegl±darka plików .info.
+
+%package devel
+Summary:	Development files for setedit
+Summary(pl):	Pliki biblioteczne setedit
+Group:		Development/Libraries
+
+%description devel
+Development files for setedit.
+
+%description devel -l pl
+Pliki biblioteczne setedit.
+
 %prep
 %setup -q -n %{name}
+%patch0
 
 %build
 rm -f Makefile
@@ -50,6 +73,7 @@ rm -f Makefile
 	--fhs
 
 %{__make}
+%{__make} -C makes libset
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -57,6 +81,22 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix}
 
+# install library by hand
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}/%{name}}
+cp makes/lib*.a $RPM_BUILD_ROOT%{_libdir}
+# remove non-object files from archives - they brak stripping
+for i in $RPM_BUILD_ROOT%{_libdir}/*.a; do
+	ar d $i rhide.env common.imk
+done
+ar d $RPM_BUILD_ROOT%{_libdir}/libset.a libeasyd.a libsettv.a
+
+cp -r include/*.h $RPM_BUILD_ROOT%{_includedir}/%{name}
+for dir in infview sdg setedit settvuti; do
+	install -d $RPM_BUILD_ROOT%{_includedir}/%{name}/$dir
+	cp -r $dir/include/*.h $RPM_BUILD_ROOT%{_includedir}/%{name}/$dir
+done
+
+rm -rf doc-setedit doc-infview
 mv $RPM_BUILD_ROOT%{_docdir}/setedit doc-setedit
 mv $RPM_BUILD_ROOT%{_docdir}/infview doc-infview
 
@@ -81,3 +121,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/setedit
 %{_infodir}/s*.info*
 %{_mandir}/man1/setedit*
+
+%files -n infview
+%defattr(644,root,root,755)
+%doc doc-infview/*
+%attr(755,root,root) %{_bindir}/infview
+%{_datadir}/infview
+%{_infodir}/infview.info*
+%{_mandir}/man1/infview*
+
+%files devel
+%defattr(644,root,root,755)
+%{_includedir}/%{name}
+%{_libdir}/lib*.a
