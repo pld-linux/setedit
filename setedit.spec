@@ -5,12 +5,6 @@ Version:	0.4.54
 Release:	1
 License:	GPL
 Group:		Applications/Editors
-Group(de):	Applikationen/Editors
-Group(es):	Aplicaciones/Editores
-Group(fr):	Applications/Editeurs
-Group(pl):	Aplikacje/Edytory
-Group(pt):	AplicaГУes/Editores
-Group(ru):	Приложения/Редакторы
 Source0:	http://prdownloads.sourceforge.net/setedit/%{name}-%{version}.tar.gz
 BuildRequires:	gcc-c++
 BuildRequires:	gpm-devel
