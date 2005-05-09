@@ -12,6 +12,7 @@ Group:		Applications/Editors
 Source0:	http://setedit.sourceforge.net/%{name}-%{version}.tar.gz
 # Source0-md5:	aa6a0533a4e1ebf7fb07a5398ce0d465
 Patch0:		%{name}-fixlib.patch
+URL:		http://setedit.sourceforge.net/
 BuildRequires:	aalib-devel
 BuildRequires:	bzip2-devel >= 0.9.5d
 BuildRequires:	gettext-devel
