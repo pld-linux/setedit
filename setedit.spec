@@ -1,17 +1,15 @@
 # TODO:
 # - build and use shared library libset
-%define	snap	20040910
 Summary:	User friendly text editor
 Summary(pl):	Przyjazny edytor tekstu
 Name:		setedit
 Version:	0.5.4
-Release:	0.%{snap}.0.1
+Release:	1
 License:	GPL
 Group:		Applications/Editors
-# note - it's really snap version, waiting for final release
-Source0:	http://setedit.sourceforge.net/%{name}-%{version}.tar.gz
-# Source0-md5:	aa6a0533a4e1ebf7fb07a5398ce0d465
-Patch0:		%{name}-fixlib.patch
+Source0:	http://dl.sourceforge.net/setedit/%{name}-%{version}.tar.gz
+# Source0-md5:	fc2f9724f11965fbd11475ff9235eaa0
+#Patch0:                %{name}-fixlib.patch
 URL:		http://setedit.sourceforge.net/
 BuildRequires:	aalib-devel
 BuildRequires:	bzip2-devel >= 0.9.5d
@@ -60,7 +58,6 @@ Pliki biblioteczne setedit.
 
 %prep
 %setup -q -n %{name}
-%patch0
 
 %build
 rm -f Makefile
