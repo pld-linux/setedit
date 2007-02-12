@@ -1,7 +1,7 @@
 # TODO:
 # - build and use shared library libset
 Summary:	User friendly text editor
-Summary(pl.UTF-8):   Przyjazny edytor tekstu
+Summary(pl.UTF-8):	Przyjazny edytor tekstu
 Name:		setedit
 Version:	0.5.4
 Release:	1
@@ -36,7 +36,7 @@ także program infview do wyświetlania plików .info.
 
 %package -n infview
 Summary:	Viewer of info pages
-Summary(pl.UTF-8):   Przeglądarka plików .info
+Summary(pl.UTF-8):	Przeglądarka plików .info
 Group:		Applications/Text
 
 %description -n infview
@@ -47,7 +47,7 @@ Przeglądarka plików .info.
 
 %package devel
 Summary:	Development files for setedit
-Summary(pl.UTF-8):   Pliki biblioteczne setedit
+Summary(pl.UTF-8):	Pliki biblioteczne setedit
 Group:		Development/Libraries
 
 %description devel
