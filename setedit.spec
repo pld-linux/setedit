@@ -1,7 +1,7 @@
 # TODO:
 # - build and use shared library libset
 Summary:	User friendly text editor
-Summary(pl):	Przyjazny edytor tekstu
+Summary(pl.UTF-8):   Przyjazny edytor tekstu
 Name:		setedit
 Version:	0.5.4
 Release:	1
@@ -29,31 +29,31 @@ Setedit is text editor, which uses Turbo Vision (menus, windows like
 in many DOS applications). It has some interesting features (MP3
 player, etc).
 
-%description -l pl
+%description -l pl.UTF-8
 Setedit to bardzo przyjazny edytor tekstu (z okienkami, menu, itd.).
-Ma on kilka "wodotrysk體" np. odtwarzacz plik體 MP3. W zestawie jest
-tak縠 program infview do wy秝ietlania plik體 .info.
+Ma on kilka "wodotrysk贸w" np. odtwarzacz plik贸w MP3. W zestawie jest
+tak偶e program infview do wy艣wietlania plik贸w .info.
 
 %package -n infview
 Summary:	Viewer of info pages
-Summary(pl):	Przegl眃arka plik體 .info
+Summary(pl.UTF-8):   Przegl膮darka plik贸w .info
 Group:		Applications/Text
 
 %description -n infview
 Viewer of .info pages.
 
-%description -n infview -l pl
-Przegl眃arka plik體 .info.
+%description -n infview -l pl.UTF-8
+Przegl膮darka plik贸w .info.
 
 %package devel
 Summary:	Development files for setedit
-Summary(pl):	Pliki biblioteczne setedit
+Summary(pl.UTF-8):   Pliki biblioteczne setedit
 Group:		Development/Libraries
 
 %description devel
 Development files for setedit.
 
-%description devel -l pl
+%description devel -l pl.UTF-8
 Pliki biblioteczne setedit.
 
 %prep
