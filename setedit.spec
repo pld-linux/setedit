@@ -63,8 +63,8 @@ Pliki biblioteczne setedit.
 rm -f Makefile
 %{__perl} ./config.pl \
 	--prefix=%{_prefix} \
-	--cflags="-pipe" \
-	--cxxflags="-pipe" \
+	--cflags="%{rpmcflags} -pipe" \
+	--cxxflags="%{rpmcflags} -fno-exceptions -pipe" \
 	--Xcflags="%{rpmcflags}" \
 	--Xcppflags="%{rpmcflags} -fno-exceptions" \
 	--no-comp-exe \
