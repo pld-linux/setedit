@@ -3,19 +3,19 @@
 Summary:	User friendly text editor
 Summary(pl.UTF-8):	Przyjazny edytor tekstu
 Name:		setedit
-Version:	0.5.4
-Release:	1
+Version:	0.5.7
+Release:	0.1
 License:	GPL
 Group:		Applications/Editors
-Source0:	http://dl.sourceforge.net/setedit/%{name}-%{version}.tar.gz
-# Source0-md5:	fc2f9724f11965fbd11475ff9235eaa0
+Source0:	http://download.sourceforge.net/setedit/%{name}_%{version}-2.tar.gz
+# Source0-md5:	99dfde9ebfce5d47aebf71fde3f5cf5f
 #Patch0:                %{name}-fixlib.patch
 URL:		http://setedit.sourceforge.net/
 BuildRequires:	aalib-devel
 BuildRequires:	bzip2-devel >= 0.9.5d
 BuildRequires:	gettext-devel
 BuildRequires:	gpm-devel >= 1.10
-BuildRequires:	librhtv-devel >= 2.0.2
+BuildRequires:	librhtv-devel >= 2.2.1
 BuildRequires:	libstdc++-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	pcre-devel
