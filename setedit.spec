@@ -4,13 +4,14 @@ Summary:	User friendly text editor
 Summary(pl.UTF-8):	Przyjazny edytor tekstu
 Name:		setedit
 Version:	0.5.7
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Editors
 Source0:	http://download.sourceforge.net/setedit/%{name}_%{version}-2.tar.gz
 # Source0-md5:	99dfde9ebfce5d47aebf71fde3f5cf5f
 Patch0:		%{name}-pcre_fullinfo.patch
 Patch1:		doc_ii.patch
+Patch2:		format-security.patch
 URL:		http://setedit.sourceforge.net/
 BuildRequires:	aalib-devel
 BuildRequires:	bzip2-devel >= 0.9.5d
@@ -26,8 +27,6 @@ BuildRequires:	recode
 BuildRequires:	texinfo
 BuildRequires:	zlib-devel >= 1.1.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define Werror_cflags -Wformat
 
 %description
 Setedit is text editor, which uses Turbo Vision (menus, windows like
@@ -65,6 +64,7 @@ Pliki biblioteczne setedit.
 %setup -q -n %{name}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 rm -f Makefile
