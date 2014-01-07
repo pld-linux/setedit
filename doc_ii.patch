@@ -1,0 +1,11 @@
+--- setedit/doc/set.txi.orig	2014-01-07 20:01:24.770600658 +0100
++++ setedit/doc/set.txi	2014-01-07 20:01:57.387771796 +0100
+@@ -187,7 +187,7 @@
+ @subtitle @value{update-month}
+ 
+ @author by @value{name-author}
+-@author @ii{last updated @value{update-date}}
++@author last updated @value{update-date}
+ 
+ @page
+ 
