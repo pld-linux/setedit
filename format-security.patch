@@ -1,0 +1,98 @@
+--- setedit/infview/infmain.cc.orig	2014-01-07 20:23:16.177547964 +0100
++++ setedit/infview/infmain.cc	2014-01-07 20:28:16.422191144 +0100
+@@ -659,34 +659,34 @@ void ParseCommandLine(int argc, char *ar
+        case 'h':
+        default:
+             TScreen::suspend();
+-            fprintf(stderr,_("InfView v"INFVIEW_VERSION_STR". Copyright (c) 1996-2002 by Salvador E. Tropea\n\n"));
+-            fprintf(stderr,_("infview [option]... [info_file [menu_item...]]\n\n"));
+-            fprintf(stderr,_("Valid options are:\n"));
+-            fprintf(stderr,_("-d, --directory DIR      adds a directory to the list of directories to search\n"
+-                             "                         (DIR to INFOPATH)\n"));
+-            fprintf(stderr,_("-f, --file FILENAME      load FILENAME info file.\n"));
++            fputs(_("InfView v"INFVIEW_VERSION_STR". Copyright (c) 1996-2002 by Salvador E. Tropea\n\n"), stderr);
++            fputs(_("infview [option]... [info_file [menu_item...]]\n\n"), stderr);
++            fputs(_("Valid options are:\n"), stderr);
++            fputs(_("-d, --directory DIR      adds a directory to the list of directories to search\n"
++                             "                         (DIR to INFOPATH)\n"), stderr);
++            fputs(_("-f, --file FILENAME      load FILENAME info file.\n"), stderr);
+             #ifdef TVCompf_djgpp // Don't name it under Linux
+-            fprintf(stderr,_("-l, --force-no-lfn       avoids the use of long file names under W9x.\n"));
+-            fprintf(stderr,_("-L, --force-lfn          forces the use of long file names under W9x.\n"));
++            fputs(_("-l, --force-no-lfn       avoids the use of long file names under W9x.\n"), stderr);
++            fputs(_("-L, --force-lfn          forces the use of long file names under W9x.\n"), stderr);
+             #else
+-            fprintf(stderr,_("-k, --use-rh-52-keys     enables the Red Hat 5.2 style keyboard mapping.\n"));
++            fputs(_("-k, --use-rh-52-keys     enables the Red Hat 5.2 style keyboard mapping.\n"), stderr);
+             #endif
+-            fprintf(stderr,_("-n, --node NODE          jumps to this node.\n"));
+-            fprintf(stderr,_("-r, --read-dkt FILENAME  if no file is opened use this desktop file.\n"));
+-            fprintf(stderr,_("-s, --save-dkt FILENAME  save the desktop to this file at exit.\n"));
+-            fprintf(stderr,_("-h, --help               displays this text ;-).\n\n"));
+-            fprintf(stderr,_("The first argument, if present, is the name of the Info file to read.\n"
+-                             "Any remaining arguments are treated as the names of menu items in the initial\n"));
++            fputs(_("-n, --node NODE          jumps to this node.\n"), stderr);
++            fputs(_("-r, --read-dkt FILENAME  if no file is opened use this desktop file.\n"), stderr);
++            fputs(_("-s, --save-dkt FILENAME  save the desktop to this file at exit.\n"), stderr);
++            fputs(_("-h, --help               displays this text ;-).\n\n"), stderr);
++            fputs(_("The first argument, if present, is the name of the Info file to read.\n"
++                             "Any remaining arguments are treated as the names of menu items in the initial\n"), stderr);
+             #ifdef TVOSf_Linux
+-            fprintf(stderr,_("node visited.  For example, `infview libc \"function index\" printf' moves to the\n"
+-                             "node `Function Index' and then to `printf' in the info file `libc'.\n\n"));
++            fputs(_("node visited.  For example, `infview libc \"function index\" printf' moves to the\n"
++                             "node `Function Index' and then to `printf' in the info file `libc'.\n\n"), stderr);
+             #else
+-            fprintf(stderr,_("node visited.  For example, `infview libc alpha printf' moves to the node\n"
+-                             "`Alphabetical list' and then to `printf' in the info file `libc'.\n\n"));
++            fputs(_("node visited.  For example, `infview libc alpha printf' moves to the node\n"
++                             "`Alphabetical list' and then to `printf' in the info file `libc'.\n\n"), stderr);
+             #endif
+-            fprintf(stderr,_("Also note that info files are searched in the INFOPATH directories. To load a\n"
++            fputs(_("Also note that info files are searched in the INFOPATH directories. To load a\n"
+                              "file stored in the current directory add ./ at the beginning of the name.\n"
+-                             "Email bug reports to salvador@inti.gov.ar or djgpp@delorie.com.\n"));
++                             "Email bug reports to salvador@inti.gov.ar or djgpp@delorie.com.\n"), stderr);
+             fflush(stderr);
+             exit(1);
+             break;
+--- setedit/mainsrc/pathtool.cc.orig	2014-01-07 20:21:15.789019515 +0100
++++ setedit/mainsrc/pathtool.cc	2014-01-07 20:21:44.666132753 +0100
+@@ -818,7 +818,7 @@ void CheckIfCurDirValid(void)
+  if (*aux==(long)0xFFFEFDFC)
+    {
+     TScreen::suspend();
+-    fprintf(stderr,_("\nError! please run the editor from a valid directory\n\n"));
++    fputs(_("\nError! please run the editor from a valid directory\n\n"), stderr);
+     fflush(stderr);
+     exit(1);
+    }
+--- setedit/setedit/editmain.cc.orig	2014-01-07 20:15:55.010725424 +0100
++++ setedit/setedit/editmain.cc	2014-01-07 20:19:43.097586013 +0100
+@@ -2669,7 +2669,7 @@ void ShowInstallError(const char *var, c
+ {
+  TScreen::suspend();
+  fprintf(stderr,_("\nWrong installation! You must define the %s environment variable.\n"),var);
+- fprintf(stderr,_("Read the readme.1st file included in the .zip distribution file.\n\n"));
++ fputs(_("Read the readme.1st file included in the .zip distribution file.\n\n"), stderr);
+  #ifdef NoHomeOrientedOS
+  char *s=getenv("DJDIR");
+  if (s)
+@@ -2680,7 +2680,7 @@ void ShowInstallError(const char *var, c
+  fflush(stderr);
+  if (end)
+     exit(1);
+- fprintf(stderr,_("press ENTER to continue\n"));
++ fputs(_("press ENTER to continue\n"), stderr);
+  getchar();
+  TScreen::resume();
+ }
+@@ -2963,7 +2963,7 @@ void ParseCommandLine(int argc, char *ar
+ 
+        case 'h':
+        default:
+-            #define PrintHelp(a) printf(a)
++            #define PrintHelp(a) fputs(a, stdout)
+             #define FlushHelp()  fflush(stdout)
+             TScreen::suspend();
+ 
