@@ -112,8 +112,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	-p	/sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
+-/sbin/setcap 'cap_sys_tty_config+ep' %{_bindir}/setedit
+
 
 %postun	-p	/sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
+
+%post	-n infview -p	/sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
+-/sbin/setcap 'cap_sys_tty_config+ep' %{_bindir}/infview
+
+%postun	-n infview -p	/sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
 %files -f %{name}.lang
