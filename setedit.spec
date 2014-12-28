@@ -15,7 +15,7 @@ Patch2:		format-security.patch
 URL:		http://setedit.sourceforge.net/
 BuildRequires:	aalib-devel
 BuildRequires:	bzip2-devel >= 0.9.5d
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	gpm-devel >= 1.10
 BuildRequires:	libmigdb
 BuildRequires:	librhtv-devel >= 2.2.1
